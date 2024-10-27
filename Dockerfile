@@ -1,4 +1,5 @@
-FROM node:alpine3.18 as build
+FROM node:23.1.0-alpine as build
+
 
 # Declare build time environment variables
 ARG REACT_APP_NODE_ENV
@@ -16,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Serve with Nginx
-FROM nginx:1.23-alpine
+FROM nginx:1.27-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf *
 COPY --from=build /app/build .
